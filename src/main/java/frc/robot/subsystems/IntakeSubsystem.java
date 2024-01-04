@@ -7,6 +7,7 @@ import com.revrobotics.CANSparkMaxLowLevel;
 import com.revrobotics.RelativeEncoder;
 import com.revrobotics.SparkMaxPIDController;
 import com.revrobotics.SparkMaxRelativeEncoder;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.lib.PIDGains;
@@ -62,6 +63,39 @@ public class IntakeSubsystem extends SubsystemBase {
         };
 
     newCommand.addRequirements(this);
+
+    return newCommand;
+  }
+
+  public Command feedLauncher(LauncherSubsystem _launcher) {
+    Command newCommand =
+        new Command() {
+          private Timer m_timer;
+
+          @Override
+          public void initialize() {
+            m_timer = new Timer();
+            m_timer.start();
+          }
+
+          @Override
+          public void execute() {
+            setPower(1.0);
+            _launcher.runLauncher();
+          }
+
+          @Override
+          public boolean isFinished() {
+            return m_timer.get() > Constants.Intake.kShotFeedTime;
+          }
+
+          @Override
+          public void end(boolean interrupted) {
+            setPower(0.0);
+          }
+        };
+
+    newCommand.addRequirements(this, _launcher);
 
     return newCommand;
   }

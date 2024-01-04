@@ -26,6 +26,7 @@ import frc.robot.Constants.OIConstants;
 import frc.robot.subsystems.ArmSubsystem;
 import frc.robot.subsystems.DriveSubsystem;
 import frc.robot.subsystems.IntakeSubsystem;
+import frc.robot.subsystems.LauncherSubsystem;
 import java.util.List;
 
 /*
@@ -39,6 +40,7 @@ public class RobotContainer {
   private final DriveSubsystem m_robotDrive = new DriveSubsystem();
   private final ArmSubsystem m_arm = new ArmSubsystem();
   private final IntakeSubsystem m_intake = new IntakeSubsystem();
+  private final LauncherSubsystem m_launcher = new LauncherSubsystem();
 
   // The driver's controller
   XboxController m_driverController = new XboxController(OIConstants.kDriverControllerPort);
@@ -68,6 +70,8 @@ public class RobotContainer {
     m_arm.setDefaultCommand(new RunCommand(() -> m_arm.runAutomatic(), m_arm));
 
     m_intake.setDefaultCommand(new RunCommand(() -> m_intake.setPower(0.0), m_intake));
+
+    m_launcher.setDefaultCommand(new RunCommand(() -> m_launcher.stopLauncher(), m_launcher));
   }
 
   /**
@@ -100,6 +104,13 @@ public class RobotContainer {
 
     new JoystickButton(m_driverController, XboxController.Button.kY.value)
         .whileTrue(new InstantCommand(() -> m_intake.setPower(-1.0)));
+
+    // launcher controls
+    new JoystickButton(m_driverController, XboxController.Button.kRightBumper.value)
+        .whileTrue(new InstantCommand(() -> m_launcher.runLauncher(), m_launcher));
+
+    new JoystickButton(m_driverController, XboxController.Button.kA.value)
+        .onTrue(m_intake.feedLauncher(m_launcher));
   }
 
   /**

@@ -57,7 +57,7 @@ public final class Constants {
   }
 
   public static final class Intake {
-    public static final int kCanId = 2;
+    public static final int kCanId = 1;
     public static final boolean kMotorInverted = true;
     public static final int kCurrentLimit = 80;
 
@@ -67,6 +67,18 @@ public final class Constants {
     public static final double kIntakePower = 0.7;
 
     public static final double kRetractDistance = -4.0;
+
+    public static final double kShotFeedTime = 2.0;
+  }
+
+  public static final class Launcher {
+    public static final int kTopCanId = 3;
+    public static final int kBottomCanId = 4;
+
+    public static final int kCurrentLimit = 80;
+
+    public static final double kTopPower = 0.7;
+    public static final double kBottomPower = 0.7;
   }
 
   public static final class DriveConstants {

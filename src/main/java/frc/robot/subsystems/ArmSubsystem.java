@@ -5,6 +5,7 @@
 package frc.robot.subsystems;
 
 import com.revrobotics.CANSparkMax;
+import com.revrobotics.CANSparkMax.IdleMode;
 import com.revrobotics.CANSparkMax.SoftLimitDirection;
 import com.revrobotics.CANSparkMaxLowLevel;
 import com.revrobotics.RelativeEncoder;
@@ -37,6 +38,7 @@ public class ArmSubsystem extends SubsystemBase {
     m_motor = new CANSparkMax(Constants.Arm.kArmCanId, CANSparkMaxLowLevel.MotorType.kBrushless);
     m_motor.setInverted(false);
     m_motor.setSmartCurrentLimit(Constants.Arm.kCurrentLimit);
+    m_motor.setIdleMode(IdleMode.kBrake);
     m_motor.enableSoftLimit(SoftLimitDirection.kForward, true);
     m_motor.enableSoftLimit(SoftLimitDirection.kReverse, true);
     m_motor.setSoftLimit(SoftLimitDirection.kForward, (float) Constants.Arm.kSoftLimitForward);
