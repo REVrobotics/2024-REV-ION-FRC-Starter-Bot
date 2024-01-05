@@ -11,6 +11,8 @@ public class LauncherSubsystem extends SubsystemBase {
   private CANSparkMax m_topMotor;
   private CANSparkMax m_bottomMotor;
 
+  private boolean m_launcherRunning;
+
   public LauncherSubsystem() {
     m_topMotor =
         new CANSparkMax(Constants.Launcher.kTopCanId, CANSparkMaxLowLevel.MotorType.kBrushless);
@@ -27,15 +29,26 @@ public class LauncherSubsystem extends SubsystemBase {
     m_bottomMotor.setIdleMode(IdleMode.kBrake);
 
     m_bottomMotor.burnFlash();
+
+    m_launcherRunning = false;
   }
 
   public void runLauncher() {
-    m_topMotor.set(Constants.Launcher.kTopPower);
-    m_bottomMotor.set(Constants.Launcher.kBottomPower);
+    m_launcherRunning = true;
   }
 
   public void stopLauncher() {
-    m_topMotor.set(0.0);
-    m_bottomMotor.set(0.0);
+    m_launcherRunning = false;
+  }
+
+  @Override
+  public void periodic() {
+    if (m_launcherRunning) {
+      m_topMotor.set(Constants.Launcher.kTopPower);
+      m_bottomMotor.set(Constants.Launcher.kBottomPower);
+    } else {
+      m_topMotor.set(0.0);
+      m_bottomMotor.set(0.0);
+    }
   }
 }

@@ -42,9 +42,9 @@ public class IntakeSubsystem extends SubsystemBase {
   }
 
   public void setPower(double _power) {
-    if (!m_positionMode) {
-      m_power = _power;
-    }
+    m_positionMode = false;
+    m_targetPosition = m_encoder.getPosition();
+    m_power = _power;
   }
 
   public Command retract() {
@@ -102,7 +102,7 @@ public class IntakeSubsystem extends SubsystemBase {
 
   @Override
   public void periodic() { // This method will be called once per scheduler run
-    if (isNearTarget()) {
+    if (m_positionMode && isNearTarget()) {
       m_positionMode = false;
       m_power = 0.0;
     }

@@ -46,14 +46,14 @@ public final class Constants {
         1.342; // radians to add to converted arm position to get real-world arm position (starts at
     // ~76.9deg angle)
     public static final ArmFeedforward kArmFeedforward =
-        new ArmFeedforward(0.0, 0.0, 12.0 / kArmFreeSpeed, 0.0);
-    public static final PIDGains kArmPositionGains = new PIDGains(0.1, 0.0, 0.0);
+        new ArmFeedforward(0.0, 3.0, 12.0 / kArmFreeSpeed, 0.0);
+    public static final PIDGains kArmPositionGains = new PIDGains(2.5, 0.0, 0.0);
     public static final TrapezoidProfile.Constraints kArmMotionConstraint =
         new TrapezoidProfile.Constraints(1.0, 2.0);
 
     public static final double kHomePosition = 0.0;
     public static final double kScoringPosition = -0.10;
-    public static final double kIntakePosition = -1.11;
+    public static final double kIntakePosition = -1.18;
   }
 
   public static final class Intake {
@@ -62,13 +62,13 @@ public final class Constants {
     public static final int kCurrentLimit = 80;
 
     public static final PIDGains kPositionGains = new PIDGains(1.0, 0.0, 0.0);
-    public static final double kPositionTolerance = 0.1;
+    public static final double kPositionTolerance = 0.5;
 
     public static final double kIntakePower = 0.7;
 
     public static final double kRetractDistance = -4.0;
 
-    public static final double kShotFeedTime = 2.0;
+    public static final double kShotFeedTime = 1.0;
   }
 
   public static final class Launcher {
@@ -85,7 +85,7 @@ public final class Constants {
     // Driving Parameters - Note that these are not the maximum capable speeds of
     // the robot, rather the allowed maximum speeds
     public static final double kMaxSpeedMetersPerSecond = 4.8;
-    public static final double kMaxAngularSpeed = 3 * Math.PI; // radians per second
+    public static final double kMaxAngularSpeed = 2 * Math.PI; // radians per second
 
     public static final double kDirectionSlewRate = 1.2; // radians per second
     public static final double kMagnitudeSlewRate = 1.8; // percent per second (1 = 100%)
