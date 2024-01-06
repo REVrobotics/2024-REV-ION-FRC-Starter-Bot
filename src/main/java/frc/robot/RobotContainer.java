@@ -27,6 +27,8 @@ import frc.robot.subsystems.ArmSubsystem;
 import frc.robot.subsystems.DriveSubsystem;
 import frc.robot.subsystems.IntakeSubsystem;
 import frc.robot.subsystems.LauncherSubsystem;
+import frc.utils.GamepadUtils;
+
 import java.util.List;
 
 /*
@@ -57,11 +59,11 @@ public class RobotContainer {
         new RunCommand(
             () ->
                 m_robotDrive.drive(
-                    -MathUtil.applyDeadband(
+                    -GamepadUtils.squareInput(
                         m_driverController.getLeftY(), OIConstants.kDriveDeadband),
-                    -MathUtil.applyDeadband(
+                    -GamepadUtils.squareInput(
                         m_driverController.getLeftX(), OIConstants.kDriveDeadband),
-                    -MathUtil.applyDeadband(
+                    -GamepadUtils.squareInput(
                         m_driverController.getRightX(), OIConstants.kDriveDeadband),
                     true,
                     false),
@@ -92,6 +94,8 @@ public class RobotContainer {
                 m_driverController.getLeftTriggerAxis()
                     > Constants.OIConstants.kTriggerButtonThreshold)
         .onTrue(new InstantCommand(() -> m_arm.setTargetPosition(Constants.Arm.kIntakePosition)));
+    new JoystickButton(m_driverController, XboxController.Button.kStart.value)
+        .onTrue(new InstantCommand(() -> m_arm.setTargetPosition(Constants.Arm.kHomePosition)));
 
     // intake controls
     new Trigger(
