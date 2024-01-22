@@ -12,7 +12,6 @@ import com.revrobotics.RelativeEncoder;
 import com.revrobotics.SparkPIDController;
 import com.revrobotics.SparkRelativeEncoder;
 import edu.wpi.first.math.trajectory.TrapezoidProfile;
-import edu.wpi.first.util.sendable.SendableBuilder;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.lib.PIDGains;
@@ -106,26 +105,5 @@ public class ArmSubsystem extends SubsystemBase {
 
   @Override
   public void periodic() { // This method will be called once per scheduler run
-  }
-
-  @Override
-  public void
-      simulationPeriodic() { // This method will be called once per scheduler run during simulation
-  }
-
-  @Override
-  public void initSendable(SendableBuilder builder) {
-    super.initSendable(builder);
-    builder.addDoubleProperty("Final Setpoint", () -> m_setpoint, null);
-    builder.addDoubleProperty("Position", () -> m_encoder.getPosition(), null);
-    builder.addDoubleProperty("Applied Output", () -> m_motor.getAppliedOutput(), null);
-    builder.addDoubleProperty("Elapsed Time", () -> m_timer.get(), null);
-    /*builder.addDoubleProperty("Target Position", () -> targetState.position, null);
-    builder.addDoubleProperty("Target Velocity", () -> targetState.velocity, null);*/
-    builder.addDoubleProperty("Feedforward", () -> m_feedforward, null);
-    builder.addDoubleProperty("Manual Value", () -> m_manualValue, null);
-    // builder.addDoubleProperty("Setpoint", () -> m_setpoint, (val) -> m_setpoint = val);
-    // builder.addBooleanProperty("At Setpoint", () -> atSetpoint(), null);
-    // addChild("Controller", m_controller);
   }
 }
