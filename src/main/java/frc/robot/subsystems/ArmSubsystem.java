@@ -4,13 +4,13 @@
 
 package frc.robot.subsystems;
 
+import com.revrobotics.CANSparkBase.IdleMode;
+import com.revrobotics.CANSparkBase.SoftLimitDirection;
+import com.revrobotics.CANSparkLowLevel;
 import com.revrobotics.CANSparkMax;
-import com.revrobotics.CANSparkMax.IdleMode;
-import com.revrobotics.CANSparkMax.SoftLimitDirection;
-import com.revrobotics.CANSparkMaxLowLevel;
 import com.revrobotics.RelativeEncoder;
-import com.revrobotics.SparkMaxPIDController;
-import com.revrobotics.SparkMaxRelativeEncoder;
+import com.revrobotics.SparkPIDController;
+import com.revrobotics.SparkRelativeEncoder;
 import edu.wpi.first.math.trajectory.TrapezoidProfile;
 import edu.wpi.first.util.sendable.SendableBuilder;
 import edu.wpi.first.wpilibj.Timer;
@@ -21,7 +21,7 @@ import frc.robot.Constants;
 public class ArmSubsystem extends SubsystemBase {
   private CANSparkMax m_motor;
   private RelativeEncoder m_encoder;
-  private SparkMaxPIDController m_controller;
+  private SparkPIDController m_controller;
   private double m_setpoint;
 
   private TrapezoidProfile m_profile;
@@ -35,7 +35,7 @@ public class ArmSubsystem extends SubsystemBase {
 
   /** Creates a new ArmSubsystem. */
   public ArmSubsystem() {
-    m_motor = new CANSparkMax(Constants.Arm.kArmCanId, CANSparkMaxLowLevel.MotorType.kBrushless);
+    m_motor = new CANSparkMax(Constants.Arm.kArmCanId, CANSparkLowLevel.MotorType.kBrushless);
     m_motor.setInverted(false);
     m_motor.setSmartCurrentLimit(Constants.Arm.kCurrentLimit);
     m_motor.setIdleMode(IdleMode.kBrake);
@@ -44,7 +44,7 @@ public class ArmSubsystem extends SubsystemBase {
     m_motor.setSoftLimit(SoftLimitDirection.kForward, (float) Constants.Arm.kSoftLimitForward);
     m_motor.setSoftLimit(SoftLimitDirection.kReverse, (float) Constants.Arm.kSoftLimitReverse);
 
-    m_encoder = m_motor.getEncoder(SparkMaxRelativeEncoder.Type.kHallSensor, 42);
+    m_encoder = m_motor.getEncoder(SparkRelativeEncoder.Type.kHallSensor, 42);
     m_encoder.setPositionConversionFactor(Constants.Arm.kPositionFactor);
     m_encoder.setVelocityConversionFactor(Constants.Arm.kVelocityFactor);
     m_encoder.setPosition(0.0);
