@@ -67,10 +67,13 @@ public class RobotContainer {
                     false),
             m_robotDrive));
 
+    // set the arm subsystem to run the "runAutomatic" function continuously when no other command is running
     m_arm.setDefaultCommand(new RunCommand(() -> m_arm.runAutomatic(), m_arm));
 
+    // set the intake to stop (0 power) when no other command is running
     m_intake.setDefaultCommand(new RunCommand(() -> m_intake.setPower(0.0), m_intake));
 
+    // configure the launcher to stop when no other command is running
     m_launcher.setDefaultCommand(new RunCommand(() -> m_launcher.stopLauncher(), m_launcher));
   }
 
@@ -81,6 +84,7 @@ public class RobotContainer {
    * {@link JoystickButton}.
    */
   private void configureButtonBindings() {
+    // button to put swerve modules in an "x" configuration to hold position
     new JoystickButton(m_driverController, XboxController.Button.kLeftStick.value)
         .whileTrue(new RunCommand(() -> m_robotDrive.setX(), m_robotDrive));
 
@@ -95,7 +99,7 @@ public class RobotContainer {
     new JoystickButton(m_driverController, XboxController.Button.kStart.value)
         .onTrue(new InstantCommand(() -> m_arm.setTargetPosition(Constants.Arm.kHomePosition)));
 
-    // intake controls
+    // intake controls (run while button is held down, run retract command once when the button is released)
     new Trigger(
             () ->
                 m_driverController.getRightTriggerAxis()
@@ -106,7 +110,7 @@ public class RobotContainer {
     new JoystickButton(m_driverController, XboxController.Button.kY.value)
         .whileTrue(new RunCommand(() -> m_intake.setPower(-1.0)));
 
-    // launcher controls
+    // launcher controls (button to pre-spin the launcher and button to launch)
     new JoystickButton(m_driverController, XboxController.Button.kRightBumper.value)
         .whileTrue(new RunCommand(() -> m_launcher.runLauncher(), m_launcher));
 
