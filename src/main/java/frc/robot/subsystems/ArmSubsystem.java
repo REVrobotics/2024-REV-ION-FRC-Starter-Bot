@@ -6,7 +6,7 @@ package frc.robot.subsystems;
 
 import com.revrobotics.CANSparkBase.IdleMode;
 import com.revrobotics.CANSparkBase.SoftLimitDirection;
-import com.revrobotics.CANSparkLowLevel;
+import com.revrobotics.CANSparkLowLevel.MotorType;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.RelativeEncoder;
 import com.revrobotics.SparkPIDController;
@@ -35,7 +35,7 @@ public class ArmSubsystem extends SubsystemBase {
   /** Creates a new ArmSubsystem. */
   public ArmSubsystem() {
     // create a new SPARK MAX and configure it
-    m_motor = new CANSparkMax(Constants.Arm.kArmCanId, CANSparkLowLevel.MotorType.kBrushless);
+    m_motor = new CANSparkMax(Constants.Arm.kArmCanId, MotorType.kBrushless);
     m_motor.setInverted(false);
     m_motor.setSmartCurrentLimit(Constants.Arm.kCurrentLimit);
     m_motor.setIdleMode(IdleMode.kBrake);

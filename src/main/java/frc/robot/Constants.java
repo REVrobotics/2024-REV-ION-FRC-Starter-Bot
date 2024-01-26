@@ -53,7 +53,7 @@ public final class Constants {
 
     public static final double kHomePosition = 0.0;
     public static final double kScoringPosition = 0.0;
-    public static final double kIntakePosition = -1.18;
+    public static final double kIntakePosition = -1.17;
   }
 
   public static final class Intake {
