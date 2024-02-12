@@ -44,7 +44,8 @@ public class ArmSubsystem extends SubsystemBase {
     m_motor.setSoftLimit(SoftLimitDirection.kForward, (float) Constants.Arm.kSoftLimitForward);
     m_motor.setSoftLimit(SoftLimitDirection.kReverse, (float) Constants.Arm.kSoftLimitReverse);
 
-    // set up the motor encoder including conversion factors to convert to radians and radians per second for position and velocity
+    // set up the motor encoder including conversion factors to convert to radians and radians per
+    // second for position and velocity
     m_encoder = m_motor.getEncoder(SparkRelativeEncoder.Type.kHallSensor, 42);
     m_encoder.setPositionConversionFactor(Constants.Arm.kPositionFactor);
     m_encoder.setVelocityConversionFactor(Constants.Arm.kVelocityFactor);
@@ -65,8 +66,9 @@ public class ArmSubsystem extends SubsystemBase {
 
   /**
    * Sets the target position and updates the motion profile if the target position changed.
+   *
    * @param _setpoint The new target position in radians.
-  */
+   */
   public void setTargetPosition(double _setpoint) {
     if (_setpoint != m_setpoint) {
       m_setpoint = _setpoint;
@@ -74,7 +76,10 @@ public class ArmSubsystem extends SubsystemBase {
     }
   }
 
-  /**Update the motion profile variables based on the current setpoint and the pre-configured motion constraints.*/
+  /**
+   * Update the motion profile variables based on the current setpoint and the pre-configured motion
+   * constraints.
+   */
   private void updateMotionProfile() {
     m_startState = new TrapezoidProfile.State(m_encoder.getPosition(), m_encoder.getVelocity());
     m_endState = new TrapezoidProfile.State(m_setpoint, 0.0);
@@ -83,11 +88,11 @@ public class ArmSubsystem extends SubsystemBase {
   }
 
   /**
-   * Drives the arm to a position using a trapezoidal motion profile.
-   * This function is usually wrapped in a {@code RunCommand} which runs it repeatedly while the command is active.
-   * <p>
-   * This function updates the motor position control loop using a setpoint from the trapezoidal motion profile.
-   * The target position is the last set position with {@code setTargetPosition}.
+   * Drives the arm to a position using a trapezoidal motion profile. This function is usually
+   * wrapped in a {@code RunCommand} which runs it repeatedly while the command is active.
+   *
+   * <p>This function updates the motor position control loop using a setpoint from the trapezoidal
+   * motion profile. The target position is the last set position with {@code setTargetPosition}.
    */
   public void runAutomatic() {
     double elapsedTime = m_timer.get();
@@ -105,8 +110,9 @@ public class ArmSubsystem extends SubsystemBase {
   }
 
   /**
-   * Drives the arm using the provided power value (usually from a joystick).
-   * This also adds in the feedforward value which can help counteract gravity.
+   * Drives the arm using the provided power value (usually from a joystick). This also adds in the
+   * feedforward value which can help counteract gravity.
+   *
    * @param _power The motor power to apply.
    */
   public void runManual(double _power) {

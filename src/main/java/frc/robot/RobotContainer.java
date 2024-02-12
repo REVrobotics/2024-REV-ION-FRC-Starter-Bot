@@ -67,7 +67,8 @@ public class RobotContainer {
                     false),
             m_robotDrive));
 
-    // set the arm subsystem to run the "runAutomatic" function continuously when no other command is running
+    // set the arm subsystem to run the "runAutomatic" function continuously when no other command
+    // is running
     m_arm.setDefaultCommand(new RunCommand(() -> m_arm.runAutomatic(), m_arm));
 
     // set the intake to stop (0 power) when no other command is running
@@ -99,7 +100,8 @@ public class RobotContainer {
     new JoystickButton(m_driverController, XboxController.Button.kStart.value)
         .onTrue(new InstantCommand(() -> m_arm.setTargetPosition(Constants.Arm.kHomePosition)));
 
-    // intake controls (run while button is held down, run retract command once when the button is released)
+    // intake controls (run while button is held down, run retract command once when the button is
+    // released)
     new Trigger(
             () ->
                 m_driverController.getRightTriggerAxis()

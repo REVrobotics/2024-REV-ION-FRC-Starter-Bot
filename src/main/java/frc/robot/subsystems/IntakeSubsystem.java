@@ -23,9 +23,7 @@ public class IntakeSubsystem extends SubsystemBase {
   private double m_targetPosition;
   private double m_power;
 
-  /**
-   * Creates a new IntakeSubsystem.
-   */
+  /** Creates a new IntakeSubsystem. */
   public IntakeSubsystem() {
     // create a new SPARK MAX and configure it
     m_motor = new CANSparkMax(Constants.Intake.kCanId, MotorType.kBrushless);
@@ -46,8 +44,8 @@ public class IntakeSubsystem extends SubsystemBase {
   }
 
   /**
-   * Set the power to spin the motor at.
-   * This only applies outside of position mode.
+   * Set the power to spin the motor at. This only applies outside of position mode.
+   *
    * @param _power The power to apply to the motor (from -1.0 to 1.0).
    */
   public void setPower(double _power) {
@@ -57,8 +55,9 @@ public class IntakeSubsystem extends SubsystemBase {
   }
 
   /**
-   * Constructs a command that drives the rollers a specific distance (number of rotations)
-   * from the current position and then ends the command.
+   * Constructs a command that drives the rollers a specific distance (number of rotations) from the
+   * current position and then ends the command.
+   *
    * @return The retract command
    */
   public Command retract() {
@@ -82,8 +81,10 @@ public class IntakeSubsystem extends SubsystemBase {
   }
 
   /**
-   * Constructs a command that feeds a note into the launcher by running the intake for a set amount of time.
-   * This command takes control of the launcher subsystem to make sure the wheels keep spinning during the launch sequence.
+   * Constructs a command that feeds a note into the launcher by running the intake for a set amount
+   * of time. This command takes control of the launcher subsystem to make sure the wheels keep
+   * spinning during the launch sequence.
+   *
    * @param _launcher The instance of the launcher subsystem
    * @return The launch command
    */
@@ -138,6 +139,7 @@ public class IntakeSubsystem extends SubsystemBase {
 
   /**
    * Check if the encoder is within the position tolerance.
+   *
    * @return Whether the position is within the tolerance.
    */
   public boolean isNearTarget() {
