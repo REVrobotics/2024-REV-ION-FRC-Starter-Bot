@@ -13,9 +13,7 @@ public class LauncherSubsystem extends SubsystemBase {
 
   private boolean m_launcherRunning;
 
-  /**
-   * Creates a new LauncherSubsystem.
-   */
+  /** Creates a new LauncherSubsystem. */
   public LauncherSubsystem() {
     // create two new SPARK MAXs and configure them
     m_topMotor =
@@ -38,21 +36,23 @@ public class LauncherSubsystem extends SubsystemBase {
   }
 
   /**
-   * Turns the launcher on.  Can be run once and the launcher will stay running or run continuously in a {@code RunCommand}.
+   * Turns the launcher on. Can be run once and the launcher will stay running or run continuously
+   * in a {@code RunCommand}.
    */
   public void runLauncher() {
     m_launcherRunning = true;
   }
 
   /**
-   * Turns the launcher off.  Can be run once and the launcher will stay running or run continuously in a {@code RunCommand}.
+   * Turns the launcher off. Can be run once and the launcher will stay running or run continuously
+   * in a {@code RunCommand}.
    */
   public void stopLauncher() {
     m_launcherRunning = false;
   }
 
   @Override
-  public void periodic() {  // this method will be called once per scheduler run
+  public void periodic() { // this method will be called once per scheduler run
     // set the launcher motor powers based on whether the launcher is on or not
     if (m_launcherRunning) {
       m_topMotor.set(Constants.Launcher.kTopPower);
